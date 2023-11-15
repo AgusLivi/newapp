@@ -43,6 +43,9 @@ Rutina.belongsTo(Coach, { foreignKey: 'coachId' }); // Una rutina pertenece a un
 Rutina.belongsTo(TipoRutina, { foreignKey: 'tipoRutinaId' }); // Una rutina pertenece a un tipo de rutina
 TipoRutina.hasMany(Rutina, { foreignKey: 'tipoRutinaId' }); // Un tipo de rutina puede tener muchas rutinas
 
+Coach.belongsToMany(User, { through: 'CoachUser', foreignKey: 'coach_ID' });
+User.belongsToMany(Coach, { through: 'CoachUser', foreignKey: 'user_ID' });
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');

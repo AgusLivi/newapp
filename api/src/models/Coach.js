@@ -35,7 +35,11 @@ module.exports = (sequelize) => {
       deleted: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-      }
+      },
+      accessibleUserNames: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: [],
+      },    
     },
   );
 };

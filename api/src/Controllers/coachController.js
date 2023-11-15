@@ -2,20 +2,31 @@ const { Coach, Rutina } = require("../db.js");
 const bcrypt = require("bcrypt"); // npm install bcrypt
 
 // Obtener un coach por ID
-const getCoachById = async (req, res) => {
+  const getCoachById = async (req, res) => {
+
     try {
      const {coach_ID} = req.params
-      const coach = await Coach.findByPk(coach_ID, {
-        include: [
-          {
-            model: Rutina,
-          },
-        ],
-      });
-      if (coach) {
-        return res.json(coach);
-      } else {
+     const { nameToSearch } = req.query;
+
+      const coach = await Coach.findByPk(coach_ID);
+      if (!coach) {
         return res.status(404).json({ error: "Entrenador no encontrado." });
+      }
+  
+      // Verifica si el coach tiene acceso al nombre del usuario
+      if (!coach.accessibleUserNames.includes(nameToSearch)) {
+        return res.status(403).json({ error: "No tienes acceso a este usuario." });
+      }
+  
+      // Realiza la búsqueda del usuario
+      const user = await User.findOne({
+        where: { name: nameToSearch },
+      });
+  
+      if (user) {
+        return res.json(user);
+      } else {
+        return res.status(404).json({ error: "Usuario no encontrado." });
       }
     } catch (error) {
       console.error(error);
@@ -24,9 +35,9 @@ const getCoachById = async (req, res) => {
   };
 
   
-const createCoach = async (req, res) => {
+  const createCoach = async (req, res) => {
     try {
-      const { name, email, image, password } =
+      const { name, email, image, password, contact } =
         req.body;
   
       const hashedPassword = await bcrypt.hash(password, 10);
