@@ -15,7 +15,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
-      // Otros campos según tus necesidades
+      daysPerWeek: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     }
   );
 
