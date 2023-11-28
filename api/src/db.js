@@ -30,21 +30,14 @@ sequelize.models = Object.fromEntries(capsEntries); // no inmporta como lo ponga
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Coach, Rutina, TipoRutina } = sequelize.models;
+const { User, Rutina, Exercise } = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
-User.hasOne(Coach, { foreignKey: 'userId' }); // Un usuario puede tener un coach
-Coach.belongsTo(User, { foreignKey: 'userId' }); // Un coach pertenece a un usuario
+// Relaciones
+User.hasMany(Rutina, { foreignKey: 'userId' }); // Un usuario puede tener muchas rutinas
+Rutina.belongsTo(User, { foreignKey: 'userId' }); // Una rutina pertenece a un usuario
 
-Coach.hasMany(Rutina, { foreignKey: 'coachId' }); // Un coach puede tener muchas rutinas
-Rutina.belongsTo(Coach, { foreignKey: 'coachId' }); // Una rutina pertenece a un coach
-
-Rutina.belongsTo(TipoRutina, { foreignKey: 'tipoRutinaId' }); // Una rutina pertenece a un tipo de rutina
-TipoRutina.hasMany(Rutina, { foreignKey: 'tipoRutinaId' }); // Un tipo de rutina puede tener muchas rutinas
-
-Coach.belongsToMany(User, { through: 'CoachUser', foreignKey: 'coach_ID' });
-User.belongsToMany(Coach, { through: 'CoachUser', foreignKey: 'user_ID' });
+Rutina.belongsToMany(Exercise, { through: 'RutinaExercise', foreignKey: 'rutinaId' }); // Una rutina puede tener muchos ejercicios
+Exercise.belongsToMany(Rutina, { through: 'RutinaExercise', foreignKey: 'exerciseId' }); // Un ejercicio puede estar en muchas rutinas', foreignKey: 'user_ID' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

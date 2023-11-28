@@ -30,11 +30,11 @@ module.exports = (sequelize) => {
         },
         image: {
             type: DataTypes.STRING,
+        },
+        coach: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false,
         }
-        // admin: {
-        //   type: DataTypes.BOOLEAN,
-        //   defaultValue: false,
-        // }
 
     });
 }

@@ -3,9 +3,9 @@ const { v4: UUIDV4 } = require("uuid");
 
 module.exports = (sequelize) => {
     sequelize.define(
-    "TipoRutina",
+    "Excercise",
     {
-      tipoRutina_ID: {
+      exercise_ID: {
         type: DataTypes.UUID,
         defaultValue: UUIDV4,
         primaryKey: true,
@@ -14,10 +14,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-      },
-      daysPerWeek: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
     }
   );

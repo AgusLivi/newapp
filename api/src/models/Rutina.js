@@ -17,11 +17,8 @@ module.exports = (sequelize) => {
       descripcion: {
         type: DataTypes.TEXT,
       },
-      // Otros campos según tus necesidades
-
-      // Relación con el modelo de TipoRutina
-      tipoRutinaId: {
-        type: DataTypes.UUID,
+      daysPerWeek: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     }
