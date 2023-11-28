@@ -1,26 +1,24 @@
-const { User, Coach } = require("../db.js");
+const { User } = require("../db.js");
 const bcrypt = require("bcrypt"); // npm install bcrypt
 
 // Obtener un usuario por ID
-// const getUserById = async (req, res) => {
-//   try {
-//     // desestructuro el token de los headers pero se puede mandar por query o params
-//     const login = req.user;
-//     if (!login)
-//       return res.status(401).json("Debe tener una cuenta para acceder");
-//     if (login.rol !== "user")
-//       return res.status(401).json("Debe acceder como usuario");
-//     const user = await User.findByPk(login.id);
-//     if (user) {
-//       res.json(user);
-//     } else {
-//       res.status(404).json({ error: "Usuario no encontrado." });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Error al obtener el usuario." });
-//   }
-// };
+const getUserById = async (req, res) => {
+  try {
+    // desestructuro el token de los headers
+    const login = req.user;
+    if (!login)
+      return res.status(401).json("Debe tener una cuenta para acceder");
+    const user = await User.findByPk(login.id);
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ error: "Usuario no encontrado." });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el usuario." });
+  }
+};
 
 // Controlador para crear un nuevo usuario
 const createUser = async (req, res) => {
@@ -57,4 +55,5 @@ const createUser = async (req, res) => {
 
 module.exports = {
   createUser,
+  getUserById
 };
