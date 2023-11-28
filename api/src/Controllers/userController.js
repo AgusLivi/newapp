@@ -44,23 +44,6 @@ const createUser = async (req, res) => {
     if (!created) {
       return res.status(400).json("ya existe un usuario con ese email");
     }
-    
-    // Accede al coach asociado al usuario (si existe)
-    const coach = await Coach.findOne({
-      where: {
-        userId: newUser.id, // Ajusta esto según cómo estén definidas tus relaciones
-      },
-    });
-
-    if (coach) {
-      // Asignar el coach a todos los usuarios
-      await User.update(
-        { coachId: coach.id }, // Ajusta esto según cómo estén definidas tus relaciones
-        { where: {} } // Esto actualiza todos los usuarios
-      );
-    }
-
-
     res.status(201).json(newUser);
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
