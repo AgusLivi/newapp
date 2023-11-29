@@ -1,11 +1,26 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Home from './src/views/Home/Home'
+import LandingPage from './src/views/LandingPage/LandingPage';
 
 export default function App() {
+  const [showHome, setShowHome] = useState(false);
+
+  const handleAccessHome = () => {
+    setShowHome(true);
+  };
+
+  const handleGoBack = () => {
+    setShowHome(false);
+  };
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {showHome ? (
+        <Home onGoBack={handleGoBack} />
+      ) : (
+        <LandingPage onAccessHome={handleAccessHome} />
+      )}
     </View>
   );
 }
