@@ -5,7 +5,11 @@ const Home = ({onGoBack}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home donde se mostrara la navegación!</Text>
-      <Button title="Cerrar sesión" onPress={onGoBack} />
+      <Button 
+        title="Cerrar sesión" 
+        onPress={onGoBack}       
+        containerStyle={styles.buttonContainer}
+        buttonStyle={styles.button} />
     </View>
   );
 };
@@ -22,6 +26,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 20,
+  },
+  buttonContainer: {
+    width: '80%', 
   },
 });
 
