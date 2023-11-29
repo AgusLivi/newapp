@@ -5,7 +5,7 @@ const Home = ({onGoBack}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home donde se mostrara la navegación!</Text>
-      <Button title="Volver a Landing" onPress={onGoBack} />
+      <Button title="Cerrar sesión" onPress={onGoBack} />
     </View>
   );
 };

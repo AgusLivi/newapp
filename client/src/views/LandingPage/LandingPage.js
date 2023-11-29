@@ -11,7 +11,7 @@ const LandingPage = ({onAccessHome}) => {
         style={styles.image}
       />
       <TouchableOpacity onPress={onAccessHome}>
-        <Text>Acceder a Home</Text>
+        <Text>Iniciar sesión</Text>
       </TouchableOpacity>
     </View>
   );
