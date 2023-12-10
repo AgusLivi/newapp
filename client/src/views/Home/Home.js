@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
+import Cards from '../../Components/Cards/Cards';
 
 const Home = ({onGoBack}) => {
   return (
@@ -10,6 +11,7 @@ const Home = ({onGoBack}) => {
         onPress={onGoBack}       
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.button} />
+      {/* <Cards/> */}
     </View>
   );
 };

@@ -1,0 +1,3 @@
+export const CREATE_ROUTINE = 'CREATE_ROUTINE'
+export const CREATE_USER = 'CREATE_USER'
+export const GET_ALL_USER = 'GET_ALL_USER'

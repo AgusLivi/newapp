@@ -1,4 +1,4 @@
-const { User } = require("../db.js");
+const { User } = require("../../db.js");
 const bcrypt = require("bcrypt"); // npm install bcrypt
 
 // Obtener un usuario por ID
@@ -53,7 +53,29 @@ const createUser = async (req, res) => {
   }
 };
 
+
+const getAllUsersByCoach = async (req, res) => {
+    try {
+        const coachId = req.user.id; 
+
+        // Verificar que el usuario sea un coach
+        const coach = await User.findOne({ where: { id: coachId, coach: true } });
+        if (!coach) {
+            return res.status(403).json({ error: 'No autorizado. Se requiere el rol de coach.' });
+        }
+
+        // Obtener todos los usuarios
+        const users = await User.findAll();
+
+        res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al obtener la lista de usuarios' });
+    }
+};
+
 module.exports = {
   createUser,
-  getUserById
+  getUserById,
+  getAllUsersByCoach,
 };
