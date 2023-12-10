@@ -1,7 +1,7 @@
 const { User } = require("../../db.js");
 const bcrypt = require("bcrypt"); 
 const jwt = require("jsonwebtoken"); 
-const {JWT_SECRE} = process.env
+const {JWT_SECRET} = process.env
 
 const login = async (req, res) => {
   try {

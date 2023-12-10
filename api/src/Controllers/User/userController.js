@@ -56,10 +56,14 @@ const createUser = async (req, res) => {
 
 const getAllUsersByCoach = async (req, res) => {
     try {
-        const coachId = req.user.id; 
+        // Verificar si req.user está definido
+        if (!req.user || !req.user.user_ID) {
+             return res.status(403).json({ error: 'No autorizado. El usuario no está autenticado correctamente.' });
+        }
+        const coachId = req.user.user_ID; 
 
         // Verificar que el usuario sea un coach
-        const coach = await User.findOne({ where: { id: coachId, coach: true } });
+        const coach = await User.findOne({ where: { user_ID: coachId, coach: true } });
         if (!coach) {
             return res.status(403).json({ error: 'No autorizado. Se requiere el rol de coach.' });
         }
