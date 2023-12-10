@@ -1,4 +1,4 @@
-const { TipoRutina, User } = require('../models');
+const { TipoRutina, User, Exercise} = require('../../db');
 
 const createTipoRutina = async (req, res) => {
     try {
@@ -20,8 +20,6 @@ const createTipoRutina = async (req, res) => {
         res.status(500).json({ error: 'Error al crear el tipo de rutina' });
     }
 };
-
-const { Exercise } = require('../models');
 
 const createExercise = async (req, res) => {
     try {
