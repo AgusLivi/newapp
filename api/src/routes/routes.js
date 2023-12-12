@@ -3,14 +3,12 @@ const { Router } = require('express');
 //controlador usuarios
 const userController = require('../Controllers/User/userController')
 const login = require('../Controllers/User/loginController')
-
 //controlador Rutinas
 const RoutineController = require('../Controllers/Rutina/RutinaControllers')
 
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-
 
 const router = Router();
 
