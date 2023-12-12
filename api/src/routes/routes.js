@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const passport = require('passport');
 
 //controlador usuarios
 const userController = require('../Controllers/User/userController')
@@ -12,12 +13,17 @@ const RoutineController = require('../Controllers/Rutina/RutinaControllers')
 
 const router = Router();
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-router.post('/create', userController.createUser)
-router.post('/login', login.login)
-router.get('/getalluser', userController.getAllUsersByCoach)
+// Middleware de autenticación (aplicado solo a rutas protegidas)
+router.use(['/getalluser', '/rcreate', '/ecreate'], passport.authenticate('jwt', { session: false }));
 
+// Configurar los routers
+// Rutas públicas
+router.post('/create', userController.createUser);
+router.post('/login', login.login);
+
+// Rutas protegidas que requieren autenticación
+//Coach
+router.get('/getalluser', userController.getAllUsersByCoach)
 //Routines
 router.post('/rcreate', RoutineController.createTipoRutina)
 router.post('/ecreate', RoutineController.createExercise)

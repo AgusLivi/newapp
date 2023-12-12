@@ -56,6 +56,7 @@ const createUser = async (req, res) => {
 
 const getAllUsersByCoach = async (req, res) => {
     try {
+      console.log("req.user:", req.user);
         // Verificar si req.user está definido
         if (!req.user || !req.user.user_ID) {
              return res.status(403).json({ error: 'No autorizado. El usuario no está autenticado correctamente.' });
