@@ -21,11 +21,10 @@ const router = Router();
 // Rutas públicas
 router.post('/create', userController.createUser);
 router.post('/login', login.login);
-
 // Rutas protegidas que requieren autenticación
 //Coach
 router.use(JWT)
-
+router.get('/getById', userController.getUserById)
 router.get('/getalluser', userController.getAllUsersByCoach)
 //Routines
 router.post('/rcreate', RoutineController.createTipoRutina)
