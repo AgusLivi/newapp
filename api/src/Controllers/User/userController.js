@@ -55,30 +55,26 @@ const createUser = async (req, res) => {
 
 
 const getAllUsersByCoach = async (req, res) => {
-    try {
-      console.log("req.user:", req.user);
-        // Verificar si req.user está definido
-        if (!req.user || !req.user.user_ID) {
-             return res.status(403).json({ error: 'No autorizado. El usuario no está autenticado correctamente.' });
-        }
-        const coachId = req.user.user_ID; 
+  try {
+    // Obtener el ID del coach desde el token
+    const coachId = req.user.id;
 
-        // Verificar que el usuario sea un coach
-        const coach = await User.findOne({ where: { user_ID: coachId, coach: true } });
-        if (!coach) {
-            return res.status(403).json({ error: 'No autorizado. Se requiere el rol de coach.' });
-        }
+    // Verificar que el usuario sea un coach
+    const coach = await User.findOne({ where: { user_ID: coachId, coach: true } });
 
-        // Obtener todos los usuarios
-        const users = await User.findAll();
-
-        res.status(200).json(users);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al obtener la lista de usuarios' });
+    if (!coach) {
+      return res.status(403).json({ error: 'No autorizado. Se requiere el rol de coach.' });
     }
-};
 
+    // Obtener todos los usuarios
+    const users = await User.findAll();
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener la lista de usuarios.' });
+  }
+};
 module.exports = {
   createUser,
   getUserById,
