@@ -14,7 +14,7 @@ const LandingPage = ({onAccessHome}) => {
           style={[styles.image, { width: screenWidth }]}
         />
         <View style={styles.overlay}>
-          <TouchableOpacity onPress={onAccessHome} style={styles.loginButton}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={styles.loginButton}>
             <Text style={styles.buttonText}>Iniciar sesión</Text>
           </TouchableOpacity>
         </View>
